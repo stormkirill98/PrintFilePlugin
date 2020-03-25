@@ -1,0 +1,17 @@
+<idea-plugin>
+    <id>org.example.PrintFilePlugin</id>
+    <name>Print File</name>
+    <vendor email="stormkirill98@gmail.com" url="https://vk.com/panihinkirill">KAPanihin</vendor>
+
+    <description>Print file to console using gradle plugin</description>
+
+    <depends>com.intellij.modules.platform</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <!-- Add your extensions here -->
+    </extensions>
+
+    <actions>
+        <!-- Add your actions here -->
+    </actions>
+</idea-plugin>
