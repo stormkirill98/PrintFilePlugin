@@ -1,7 +1,12 @@
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.fileChooser.FileChooser
+import com.intellij.openapi.fileChooser.FileChooserDescriptor
 import com.intellij.openapi.fileChooser.FileChooserDescriptorFactory
+import com.intellij.openapi.fileChooser.ex.FileChooserDialogImpl
+import com.intellij.openapi.project.Project
+import javax.swing.Action
+import javax.swing.JButton
 
 class PrintFile : AnAction() {
     override fun actionPerformed(e: AnActionEvent) {
@@ -15,4 +20,12 @@ class PrintFile : AnAction() {
             return
         }
     }
+}
+
+
+class FileChooser(descriptor: FileChooserDescriptor, project: Project) : FileChooserDialogImpl(descriptor, project) {
+    override fun createActions(): Array<Action> {
+        return super.createActions()
+    }
+
 }
