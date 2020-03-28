@@ -11,6 +11,18 @@ repositories {
     mavenCentral()
 }
 
+buildscript {
+    repositories {
+        flatDir {
+            dirs("./plugins")
+        }
+    }
+
+    dependencies {
+        classpath("org.example:GradlePlugin:1.0-SNAPSHOT")
+    }
+}
+
 dependencies {
     implementation(kotlin("stdlib-jdk8"))
     testCompile("junit", "junit", "4.12")
@@ -35,6 +47,7 @@ tasks {
 }
 tasks.getByName<org.jetbrains.intellij.tasks.PatchPluginXmlTask>("patchPluginXml") {
     changeNotes("""
-      Add change notes here.<br>
-      <em>most HTML tags may be used</em>""")
+          Add change notes here.<br>
+          <em>most HTML tags may be used</em>
+    """)
 }
