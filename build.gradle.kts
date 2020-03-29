@@ -19,8 +19,12 @@ buildscript {
     }
 
     dependencies {
-        classpath("org.example:GradlePlugin:1.0-SNAPSHOT")
+        classpath("org.example:print-file:1.0")
     }
+}
+
+apply {
+    plugin("print-file")
 }
 
 dependencies {
