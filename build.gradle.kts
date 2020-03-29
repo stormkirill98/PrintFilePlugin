@@ -9,6 +9,7 @@ version = "1.0-SNAPSHOT"
 
 repositories {
     mavenCentral()
+    maven { url = uri("https://repo.gradle.org/gradle/libs-releases") }
 }
 
 buildscript {
@@ -29,6 +30,8 @@ apply {
 
 dependencies {
     implementation(kotlin("stdlib-jdk8"))
+    implementation("org.gradle", "gradle-tooling-api","6.2.2")
+    runtimeOnly("org.slf4j", "slf4j-simple", "1.7.10")
     testCompile("junit", "junit", "4.12")
 }
 
