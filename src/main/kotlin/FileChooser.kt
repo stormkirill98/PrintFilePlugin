@@ -9,7 +9,7 @@ class FileChooser(descriptor: FileChooserDescriptor, project: Project?) : FileCh
     override fun createActions(): Array<Action> {
         setOKButtonText("Run")
 
-        return if (helpAction === myHelpAction && helpId == null)
+        return if (helpAction == myHelpAction && helpId == null)
             arrayOf(okAction)
         else arrayOf(okAction, helpAction)
     }

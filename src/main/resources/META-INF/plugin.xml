@@ -8,12 +8,13 @@
     <depends>com.intellij.modules.platform</depends>
 
     <extensions defaultExtensionNs="com.intellij">
-        <!-- Add your extensions here -->
+        <toolWindow id="Print File Console"
+                    anchor="bottom"
+                    factoryClass="ConsoleOutput"/>
     </extensions>
 
     <actions>
-        <!-- Add your actions here -->
-        <action id="PrintFileToConsole" class="PrintFile" text="Print File" description="Print file to console">
+        <action id="PrintFileToConsole" class="Action" text="Print File" description="Print file to console">
             <add-to-group group-id="ToolsMenu" anchor="last"/>
         </action>
     </actions>

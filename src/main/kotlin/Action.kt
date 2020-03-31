@@ -1,11 +1,13 @@
 import com.intellij.openapi.actionSystem.AnAction
 import com.intellij.openapi.actionSystem.AnActionEvent
 import com.intellij.openapi.fileChooser.FileChooserDescriptorFactory
-import org.gradle.tooling.GradleConnector
-import org.gradle.tooling.model.GradleProject
-import java.io.File
 
-class PrintFile : AnAction() {
+
+const val PRINT_FILE_TASK = "printFile"
+
+// TODO disable button if not found task
+
+class Action : AnAction() {
     override fun actionPerformed(e: AnActionEvent) {
         val descriptor = FileChooserDescriptorFactory.createSingleFileNoJarsDescriptor()
         val files = FileChooser(descriptor, e.project).choose(e.project)
@@ -17,15 +19,19 @@ class PrintFile : AnAction() {
             return
         }
 
-        val projectPath = File(e.project!!.basePath!!)
-        val gradleConnection = GradleConnector
-            .newConnector()
-            .forProjectDirectory(projectPath)
-            .connect()
+        val gradleConnection = getGradleConnection(e.project)
 
+        if (gradleConnection == null) {
+            Notifier.error("Cannot connect to gradle", e.project)
+            return
+        }
+
+        val filePath = files.first().path
         gradleConnection.use {
-            val project = gradleConnection.getModel(GradleProject::class.java)
-            project.tasks.forEach { println(it.name) }
+            gradleConnection.newBuild()
+                .forTasks(PRINT_FILE_TASK)
+                .withArguments("-PfilePath=$filePath")
+                .run()
         }
     }
 }
