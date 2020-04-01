@@ -3,7 +3,8 @@ import com.intellij.notification.NotificationDisplayType
 import com.intellij.notification.NotificationGroup
 import com.intellij.notification.NotificationType
 import com.intellij.openapi.project.Project
-
+import java.io.PrintWriter
+import java.io.StringWriter
 
 object Notifier {
     private val notificationGroup =
@@ -17,5 +18,11 @@ object Notifier {
         val notification: Notification = notificationGroup.createNotification(content, type)
         notification.notify(project)
         return notification
+    }
+
+    fun error(content: String, exception: Exception, project: Project?) {
+        val stackTrace = StringWriter()
+        exception.printStackTrace(PrintWriter(stackTrace))
+        error(content + "\n" + stackTrace.toString(), project)
     }
 }

@@ -1,4 +1,5 @@
 import com.intellij.execution.filters.TextConsoleBuilderFactory
+import com.intellij.execution.ui.ConsoleView
 import com.intellij.openapi.project.DumbAware
 import com.intellij.openapi.project.Project
 import com.intellij.openapi.wm.ToolWindow
@@ -9,10 +10,14 @@ class ConsoleOutput : ToolWindowFactory, DumbAware {
         toolWindow.title = "Print File"
         val contentManager = toolWindow.contentManager
 
-        val consoleView = TextConsoleBuilderFactory.getInstance().createBuilder(project).console
+        consoleView = TextConsoleBuilderFactory.getInstance().createBuilder(project).console
         val content = contentManager
             .factory
-            .createContent(consoleView.component, "Output", false)
+            .createContent(consoleView?.component, "Output", false)
         contentManager.addContent(content)
+    }
+
+    companion object {
+        var consoleView: ConsoleView? = null
     }
 }
